@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
+
+'''
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +41,32 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+'''
+
+# Omar: Aplicaciones default de Django
+DJANGO_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+# Omar: Aplicaciones desarrolladas
+APPLICATIONS_APPS = [
+    'modules.Publicaciones',
+    'modules.Home',
+    'modules.Nasa',
+]
+
+# Omar: Aplicaciones de terceros
+# se instala rest_framework
+THIRD_APPS = [
+
+]
+
+INSTALLED_APPS = DJANGO_APPS + APPLICATIONS_APPS + THIRD_APPS
 
 # para checar todo lo que manda el servidor
 
@@ -57,6 +86,9 @@ ROOT_URLCONF = 'Blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # Omar en caso de usar templates dentro de la app
+        # se pone
+        # 'DIRS': ['templates', 'modules.migrations.templates']
         'DIRS': ['templates'], # Omar: Se cambió de [] a carpeta templates a la altura de manage.py
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,6 +109,7 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 # Omar: Devf indican que la configuración debe de estar por separdo
+# en el archivo local_settings.py
 
 DATABASES = {
     'default': {
@@ -121,6 +154,32 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+'''
 STATIC_URL = '/static/' # Omar: Ruta relativa para servir estaticos
-STATIC_ROOT = '' # Omar Devf: Ruta absoluta, donde realmente estan almacenados los archivos estaticos
+#STATIC_ROOT = os.path.join(os.getcwd(),'static') # Omar Devf: Ruta absoluta, donde realmente estan almacenados los archivos estaticos
+STATICFILES_DIRS = [os.path.join(os.getcwd(),'static')]
+# getcwd trae la ruta donde este manage.py
+
+# 
+#STATIC_FILESDIRS = [os.path.join(os.getcwd(),'static')]
+
+MEDIA_URL = '/media/' # Omar: Ruta relativa para servir estaticos
+MEDIA_ROOT = os.path.join(os.getcwd(),'media') 
+'''
+
+STATIC_URL = '/static/' #Ruta relativa
+#STATIC_ROOT = os.path.join(os.getcwd(),'static')
+STATICFILES_DIRS = [os.path.join(os.getcwd(),'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.getcwd(),'media')
+print ("MEDIA_ROOT: " + MEDIA_ROOT)
+
+
+
+
+
+try:
+    from .local_settings import *
+except:
+    pass

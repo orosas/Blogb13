@@ -16,7 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+# para cargar media y static
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('modules.Home.urls')),
+    url(r'^', include('modules.Home.urls', namespace='Home', app_name='Home'), name="Home"),
+    url(r'^publicaciones/', include('modules.Publicaciones.urls', namespace='Publicaciones', app_name='Publicaciones')),
+    url(r'^nasa/', include('modules.Nasa.urls', namespace='Nasa', app_name='Nasa'), name="Nasa"),
+
 ]

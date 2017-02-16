@@ -19,11 +19,15 @@ from django.contrib import admin
 # para cargar media y static
 from django.conf import settings
 from django.conf.urls.static import static
+# Par django rest framework
+from .api_urls import urlpatterns as api_urls
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('modules.Home.urls', namespace='Home', app_name='Home'), name="Home"),
     url(r'^publicaciones/', include('modules.Publicaciones.urls', namespace='Publicaciones', app_name='Publicaciones')),
     url(r'^nasa/', include('modules.Nasa.urls', namespace='Nasa', app_name='Nasa'), name="Nasa"),
-
+    #urls api
+    url(r'^api/v1/', include(api_urls)),
 ]

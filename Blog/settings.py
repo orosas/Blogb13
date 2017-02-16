@@ -63,7 +63,7 @@ APPLICATIONS_APPS = [
 # Omar: Aplicaciones de terceros
 # se instala rest_framework
 THIRD_APPS = [
-
+    'rest_framework',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATIONS_APPS + THIRD_APPS
@@ -175,8 +175,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.getcwd(),'media')
 print ("MEDIA_ROOT: " + MEDIA_ROOT)
 
-
-
+#Configuracion para Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
 
 
 try:

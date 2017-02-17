@@ -3,7 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 #from .serializers import UserSerializer,UserSecondSerializer
-# PARA LA SEGUNDA clase
+
+# PARA LA SEGUNDA class UserDetail
 from .serializers import *
 from django.shortcuts import get_object_or_404
 
@@ -57,3 +58,16 @@ class UserDetail(APIView):
         user = get_object_or_404(User,pk=pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+# va a utilizar una url como
+# http://127.0.0.1:8000/api/v1/users/publicacionesapi
+class PublicacionList(APIView):
+
+    def get(self,request):
+        publicaciones = Publicacion.objects.all()
+
+        serializer = PublicacionSecondSerializer(publicaciones,many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

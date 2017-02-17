@@ -32,3 +32,12 @@ class UserSecondSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('is_active',)
 
+# Class para llamar "datos" de tablas "cruzadas"
+# 
+class PublicacionSecondSerializer(serializers.ModelSerializer,serializers.Serializer):
+
+    writer_username = serializers.CharField(source='autor.username')
+    #writer_lastname = serializers.CharField(source='autor.apaterno')
+    class Meta:
+        model = Publicacion
+        fields = ('nombre', 'contenido', 'fecha', 'tags', 'writer_username',)

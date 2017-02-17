@@ -14,11 +14,12 @@ class UserList(APIView):
     def get(self,request):
         #Se pide todo los usuarios
         user = User.objects.all()
-        serializer = UserSerializer(user,many=True)
+        serializer = UserFirstSerializer(user,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
     
     def post(self,request):
         #Se crea el usuario
+        # request.data son los datos dentro del body
         serializer = UserSerializer(data=request.data)
         print(serializer)
         if serializer.is_valid():

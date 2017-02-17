@@ -26,7 +26,7 @@ class Publicacion(models.Model):
 	nombre = models.CharField(max_length=50)
 	contenido = models.TextField()
 	fecha = models.DateField(auto_now_add=True) # Timestamp
-	autor = models.ForeignKey(User,on_delete=models.CASCADE) # Pasar el modelo con el cual se va a relacionar
+	autor = models.ForeignKey(User,on_delete=models.CASCADE, related_name='publicaciones') # Pasar el modelo con el cual se va a relacionar
 	tags = models.CharField(choices=TAGS, max_length=50)
 	imagen = models.ImageField(upload_to='Publicaciones/',null=True, blank=True)
 

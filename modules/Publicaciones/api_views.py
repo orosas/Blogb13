@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 # PARA LA SEGUNDA class UserDetail
 from .serializers import *
 from django.shortcuts import get_object_or_404
+from rest_framework import generics
 
 #Vistas basadas en clases
 
@@ -71,3 +72,23 @@ class PublicacionList(APIView):
         serializer = PublicacionSecondSerializer(publicaciones,many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+###############################################################
+###############################################################
+# Genericas
+# usa urls: 
+# url(r'^publicacionesapi/$', PublicacionList.as_view()),
+# url(r'^publicacionesapi/(?P<pk>[0-9]+)/$', PublicacionDetail.as_view()),
+# Clase genérica para generar el get y post al igual que el class UserList
+# Va a usar:
+# http://127.0.0.1:8000/api/v1/users/publicacionesapi/1/
+# 
+class PublicacionList(generics.ListCreateAPIView):
+    queryset = Publicacion.objects.all()
+    serializer_class = PublicacionSerializer
+
+# Clase genérica que hace lo mismo que Userdetail get, put y delete (RetrieveUpdateDestroy)
+class PublicacionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Publicacion.objects.all()
+    serializer_class = PublicacionSerializer
+

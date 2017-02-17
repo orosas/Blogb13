@@ -9,7 +9,7 @@ class PublicacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Publicacion
-        fields = ('nombre', 'contenido', 'fecha', 'tags')
+        fields = ('nombre', 'contenido', 'fecha', 'tags', 'autor')
 
 class UserFirstSerializer(serializers.ModelSerializer):
 

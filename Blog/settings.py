@@ -64,6 +64,7 @@ APPLICATIONS_APPS = [
 # se instala rest_framework
 THIRD_APPS = [
     'rest_framework',
+    'rest_framework_swagger',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATIONS_APPS + THIRD_APPS

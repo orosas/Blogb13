@@ -182,7 +182,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-
+# Se agrega configuración externa para la base de datos
 try:
     from .local_settings import *
 except:

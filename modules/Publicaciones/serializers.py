@@ -13,6 +13,7 @@ class PublicacionSerializer(serializers.ModelSerializer):
 
 class UserFirstSerializer(serializers.ModelSerializer):
 
+    # Siguiente línea indica las publicaciones del usuario
     publicaciones = PublicacionSerializer(read_only=True,many=True)
 
     class Meta:

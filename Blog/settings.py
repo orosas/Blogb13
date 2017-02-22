@@ -177,7 +177,7 @@ MEDIA_ROOT = os.path.join(os.getcwd(),'media')
 '''
 
 STATIC_URL = '/static/' #Ruta relativa
-#STATIC_ROOT = os.path.join(os.getcwd(),'static')
+STATIC_ROOT = os.path.join(os.getcwd(),'static')
 STATICFILES_DIRS = [os.path.join(os.getcwd(),'static')]
 
 MEDIA_URL = '/media/'

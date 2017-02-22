@@ -124,6 +124,7 @@ DATABASES = {
 }
 """
 # En heroku se trae la configuración de la base
+DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 
 

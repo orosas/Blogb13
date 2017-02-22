@@ -25,7 +25,7 @@
 		<p>Ejemplo de For anidados:</p>
 		{% for publicacion in publicaciones %}
 			{% for key, value in publicacion.items %}
-				{{key}}:{{value}}
+				El key es: {{key}}  ::::: El Value es: {{value}}
 				<br>
 			{%endfor%}
 				<br>
@@ -50,5 +50,5 @@
 				<hr>
 		{%endfor%}	
 
-		<a href="{% url "Publicaciones:add-publicaciones" %}">Agregar Publicaci&oacute;</a>
+		<a href="{% url "Publicaciones:add-publicaciones" %}">Agregar Publicación</a>
 	{%endblock%}

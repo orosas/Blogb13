@@ -19,18 +19,18 @@ def Otros(request,num):
 
 def Sumar(request,num1, num2):
 
-	lasuma = num1 + num2
-	return HttpResponse('La suma de: '+num1+' y '+num2+' es ='+lasuma )
+	lasuma = int(num1) + int(num2)
+	return HttpResponse('La suma de: '+ str(num1) +' y '+ str(num2) +' es ='+ str(lasuma) )
 
 def Saludo(request,nombre):
 
 	return HttpResponse('Hola '+nombre )
 
 def Mayorque(request, num1, num2):
-	if num1 > num2:
-		return HttpResponse('Parametro 1: '+num1+' mayor que Parametro 2'+num2)
+	if int(num1) > int(num2):
+		return HttpResponse('Parametro 1: '+num1+' es mayor que Parametro 2: '+num2)
 	else:
-		return HttpResponse('Parametro 2: '+num2+' mayor que Parametro 1'+num1)
+		return HttpResponse('Parametro 2: '+num2+' es mayor que Parametro 1: '+num1)
 
 
 """
@@ -67,8 +67,13 @@ def Signup(request):
 		username = request.POST['username']
 		email = request.POST['email']
 		password = request.POST['password']
+		print("Dentro de if ....")
 
-		user = User.objects.get(username=username)
+		try:
+			user = User.objects.get(username=username)
+		except User.DoesNotExist:
+			user = None
+		
 		if user is None:
 			user = User.objects.create_user(
 				first_name=first_name,
@@ -83,7 +88,6 @@ def Signup(request):
 			return HttpResponse('<b>El Usuario que ingresaste ya existe</b>')
 	else:
 		return render(request,'Home/signup.html')
-
 
 
 

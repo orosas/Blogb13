@@ -65,6 +65,7 @@ APPLICATIONS_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'rest_framework_swagger',
+    'django_filters'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATIONS_APPS + THIRD_APPS
@@ -180,7 +181,8 @@ print ("MEDIA_ROOT: " + MEDIA_ROOT)
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 # Se agrega configuración externa para la base de datos

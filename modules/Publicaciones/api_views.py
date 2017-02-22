@@ -7,7 +7,13 @@ from django.contrib.auth.models import User
 # PARA LA SEGUNDA class UserDetail
 from .serializers import *
 from django.shortcuts import get_object_or_404
-from rest_framework import generics
+from rest_framework import generics, filters
+
+# Para clase de filtros
+from django_filters.rest_framework import DjangoFilterBackend
+#from rest_framework import filters
+
+
 
 #Vistas basadas en clases
 
@@ -83,9 +89,33 @@ class PublicacionList(APIView):
 # Va a usar:
 # http://127.0.0.1:8000/api/v1/users/publicacionesapi/1/
 # 
+
+"""
 class PublicacionList(generics.ListCreateAPIView):
     queryset = Publicacion.objects.all()
     serializer_class = PublicacionSerializer
+"""
+# Usa from django_filters.rest_framework import DjangoFilterBackend 
+# y from rest_framework import generics, filters
+class PublicacionList(generics.ListCreateAPIView):
+    queryset = Publicacion.objects.all()
+    serializer_class = PublicacionSerializer
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,)
+    filter_fields = ('fecha',)
+    search_fields = ('nombre', 'tags',)
+
+    """
+    # Filtra pasando el parámetro de la forma:
+    #http://127.0.0.1:8000/api/v1/users/publicacionesapi/?publicacion=Primer Post
+    def get_queryset(self):
+
+        queryset = Publicacion.objects.all()
+        name = self.request.query_params.get('publicacion', None)
+
+        if name is not None:
+            queryset = Publicacion.objects.filter(nombre__icontains=name)
+        return queryset
+    """
 
 # Clase genérica que hace lo mismo que Userdetail get, put y delete (RetrieveUpdateDestroy)
 class PublicacionDetail(generics.RetrieveUpdateDestroyAPIView):

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+# Heroku inyecta los datos de la base de datos usuario, password
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

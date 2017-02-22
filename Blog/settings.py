@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3@-4%d(eg+qdlf2)m4xnpniq_rz^+f-%f275#2v$!@3!&dcn*o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+#para deploy en heroku
+SECURE_PROXY_SSL_HEADER = ['HTTP_X_FORWARDED_PROTO', 'https']
 
 # Application definition
 
@@ -112,13 +115,16 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 # Omar: Devf indican que la configuración debe de estar por separdo
 # en el archivo local_settings.py
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+"""
+# En heroku se trae la configuración de la base
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
